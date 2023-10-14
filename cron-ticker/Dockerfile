@@ -14,12 +14,14 @@ RUN npm install
 CMD [ "node","app.js" ]
 
 # BUILD
-# docker build --tag cron-ticker .
+# docker build --tag cron-ticker . => cront-ticker:latest, cron-ticker:castor, cron-ticker:nuub, etc
 
 # TAGS
 # docker tag cron-ticker cron-ticker:castor => cron-ticker:latest
 
-
+# PUSH
+# rename container to remote container name jadero/cron-ticker, or jadero/cron-ticker:castor or wutever
+# docker push jadero/cron-ticker, jadero/cron-ticker:castor
 
 
 
