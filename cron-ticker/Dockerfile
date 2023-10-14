@@ -13,7 +13,11 @@ RUN npm install
 # start server, only one CMD per file
 CMD [ "node","app.js" ]
 
+# BUILD
 # docker build --tag cron-ticker .
+
+# TAGS
+# docker tag cron-ticker cron-ticker:castor => cron-ticker:latest
 
 
 
