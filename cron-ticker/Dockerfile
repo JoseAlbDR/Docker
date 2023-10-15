@@ -13,6 +13,12 @@ RUN npm install
 # testing
 RUN npm run test
 
+# delete unused files
+RUN rm -rf tests && rm -rf node_modules
+
+# reinstall prod dependencies
+RUN npm install --prod
+
 # start server, only one CMD per file
 CMD [ "node","app.js" ]
 
