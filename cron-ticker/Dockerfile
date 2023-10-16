@@ -3,7 +3,8 @@
 # FROM node:19.2-alpine3.17
 
 # Multiple platforms
-FROM --platform=$BUILDPLATFORM node:19.2-alpine3.17
+# FROM --platform=$BUILDPLATFORM node:19.2-alpine3.17
+FROM node:19.2-alpine3.17
 
 
 # cd app
@@ -38,6 +39,9 @@ CMD [ "node","app.js" ]
 # docker push jadero/cron-ticker, jadero/cron-ticker:castor
 
 # BUILDX
+# docker buildx create --name mybuilder --driver docker-container --bootstrap
+# docker buildx ls
+# docker buildx use mybuilder
 # docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm64/v8 -t jadero/cron-ticker --push .
 
 
