@@ -1,11 +1,16 @@
 # /app
-FROM node:19.2-alpine3.17
+# FROM --platform=arm64 node:19.2-alpine3.17
+# FROM node:19.2-alpine3.17
+
+# Multiple platforms
+FROM --platform=$BUILDPLATFORM node:19.2-alpine3.17
+
 
 # cd app
 WORKDIR /app
 
 # copy needed files to /app
-COPY . ./
+COPY . .
 
 # install dependencies and start server
 RUN npm install
@@ -32,7 +37,8 @@ CMD [ "node","app.js" ]
 # rename container to remote container name jadero/cron-ticker, or jadero/cron-ticker:castor or wutever
 # docker push jadero/cron-ticker, jadero/cron-ticker:castor
 
-
+# BUILDX
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm64/v8 -t jadero/cron-ticker --push .
 
 
 
