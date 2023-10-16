@@ -4,25 +4,53 @@
 
 # Multiple platforms
 # FROM --platform=$BUILDPLATFORM node:19.2-alpine3.17
-FROM node:19.2-alpine3.17
+
+# STAGE 1 Dependencies
+FROM node:19.2-alpine3.17 as dependencies
 
 # cd app
 WORKDIR /app
 
-# copy needed files to /app
-COPY . .
+# copy package.json
+COPY package.json ./
 
 # install dependencies and start server
 RUN npm install
 
-# testing
+
+# STAGE 2 Build and Test
+FROM node:19.2-alpine3.17 as builder
+
+# move to app
+WORKDIR /app
+
+# copy node_modules from dependencies stage
+COPY --from=dependencies /app/node_modules ./node_modules
+
+# copy from host to builder
+COPY . .
+
 RUN npm run test
 
-# delete unused files
-RUN rm -rf tests && rm -rf node_modules
 
-# reinstall prod dependencies
-RUN npm install --prod
+# STAGE 3 Production dependencies
+FROM node:19.2-alpine3.17 as prod-deps
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install --omit=dev
+
+
+# STAGE 4 runner
+FROM node:19.2-alpine3.17 as runner
+
+WORKDIR /app
+
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY app.js ./
+COPY tasks/ ./tasks
 
 # start server, only one CMD per file
 CMD [ "node","app.js" ]
