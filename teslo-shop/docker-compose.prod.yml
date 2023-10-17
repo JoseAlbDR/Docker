@@ -8,10 +8,11 @@ services:
       target: ${STAGE}
       dockerfile: Dockerfile
 
-    volumes:
-      - .:/app/
-      - /app/node_modules
+    # volumes:
+    #   - .:/app/
+    #   - /app/node_modules
 
+    image: jadero/teslo-shop-backend:2.0.0
     container_name: nest-app
     ports:
       - ${PORT}:${PORT}
