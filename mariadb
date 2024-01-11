@@ -6,10 +6,12 @@ docker container run \
 --env MARIADB_ROOT_PASSWORD=root-secret-password \
 --env MARIADB_DATABASE=world-db \
 --volume world-db:/var/lib/mysql \
+--network world-app \
 mariadb:11.2.2-jammy
 
 docker container run \
 -dp 8080:80 \
 --name phpmyadmin \
 -e PMA_ARBITRARY=1 \
+--network world-app \
 phpmyadmin:5.2.0-apache 
