@@ -7,3 +7,9 @@ docker container run \
 --env MARIADB_DATABASE=world-db \
 --volume world-db:/var/lib/mysql \
 mariadb:11.2.2-jammy
+
+docker container run \
+-dp 8080:80 \
+--name phpmyadmin \
+-e PMA_ARBITRARY=1 \
+phpmyadmin:5.2.0-apache 
