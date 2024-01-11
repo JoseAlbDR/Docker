@@ -7,7 +7,7 @@ CMD ["yarn", "start:dev"]
 FROM node:19-alpine3.15 as dev-deps
 WORKDIR /app
 COPY package.json package.json
-RUN yarn install 
+RUN yarn install --network-timeout 600000
 
 
 FROM node:19-alpine3.15 as builder
@@ -20,7 +20,7 @@ RUN yarn build
 FROM node:19-alpine3.15 as prod-deps
 WORKDIR /app
 COPY package.json package.json
-RUN yarn install --prod --frozen-lockfile
+RUN yarn install --prod --frozen-lockfile --network-timeout 600000
 
 
 FROM node:19-alpine3.15 as prod
