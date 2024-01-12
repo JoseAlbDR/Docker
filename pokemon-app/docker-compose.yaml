@@ -6,12 +6,13 @@ services:
     image: mongo:6.0
     volumes:
       - poke-vol:/data/db
-    environment:
-      - name=value
     ports:
       - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: yusep
+      MONGO_INITDB_ROOT_PASSWORD: mekieros
     restart: always
-
+    command: ['--auth']
 volumes:
   poke-vol:
     external: false
