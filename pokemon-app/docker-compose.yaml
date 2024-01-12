@@ -2,15 +2,15 @@ version: '3.8'
 
 services:
   db:
-    container_name: pokemon_db
+    container_name: ${MONGO_DB_NAME}
     image: mongo:6.0
     volumes:
       - poke-vol:/data/db
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: yusep
-      MONGO_INITDB_ROOT_PASSWORD: mekieros
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     restart: always
     command: ['--auth']
 volumes:
