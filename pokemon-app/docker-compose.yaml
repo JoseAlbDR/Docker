@@ -1,4 +1,4 @@
-version: 3.8
+version: '3.8'
 
 services:
   db:
@@ -6,6 +6,11 @@ services:
     image: mongo:6.0
     volumes:
       - poke-vol:/data/db
+    environment:
+      - name=value
+    ports:
+      - 27017:27017
+    restart: always
 
 volumes:
   poke-vol:
