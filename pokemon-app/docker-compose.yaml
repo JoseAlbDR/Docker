@@ -26,6 +26,18 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_PASSWORD}
     restart: always
 
+  pokemon-app:
+    depends_on:
+      - db
+    container_name: poke-app
+    image: klerith/pokemon-nest-app
+    ports:
+      - 3000:3000
+    environment:
+      - MONGODB=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_DB_NAME}
+      - DB_NAME=poke_db
+    restart: always
+
 volumes:
   poke-vol:
     external: false
