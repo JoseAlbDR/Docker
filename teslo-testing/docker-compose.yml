@@ -2,8 +2,10 @@ version: '3.8'
 
 services:
   app:
+    depends_on:
+      - db
     container_name: teslo-test
-    image: jaderodev/teslo-shop
+    image: jaderodev/teslo-shop:1.0
     ports:
       - ${PORT}:${PORT}
     environment:
