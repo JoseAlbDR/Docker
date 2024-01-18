@@ -33,5 +33,13 @@ Ejecutar este comando
 ```
   docker buildx build \
   --platform linux/amd64,linux/arm64 \
-  -t <username>/<image>:latest --push .
+  -t jaderodev/teslo-shop:ssl --push .
+```
+
+## Digital Ocean
+
+```
+  docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -t registry.digitalocean.com/jaderodev-registry/teslo-shop:ssl-do --push .
 ```
