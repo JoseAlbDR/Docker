@@ -14,6 +14,7 @@ FROM nginx:1.23.3 as prod
 EXPOSE 80
 
 COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/assets/heroes /usr/share/nginx/html/assets/heroes
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
