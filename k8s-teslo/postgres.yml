@@ -20,12 +20,12 @@ spec:
           ports:
             - containerPort: 5432
           env:
-            - POSTGRES_PASSWORD
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secrets
                   key: DB_PASSWORD
-            - POSTGRES_USER
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: postgres-secrets
